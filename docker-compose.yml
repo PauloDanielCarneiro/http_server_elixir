@@ -22,3 +22,5 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8000:65535"
+    command: >
+      sh -c "mix deps.get && mix escript.build && ./http_server app/myapp.exs --port 65535"
