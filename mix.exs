@@ -11,6 +11,9 @@ defmodule HTTPSERVER.Mixfile do
      deps: deps()]
   end
 
+  def escript do
+    [main_module: HTTPSERVER.CLI]
+  end
 
   # Configuration for the OTP application
   #
