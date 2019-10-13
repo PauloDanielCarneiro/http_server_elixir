@@ -1,0 +1,24 @@
+version: "3"
+
+networks:
+  JB: {}
+
+services:
+  http:
+    container_name: http-server
+    dns:
+      - 8.8.8.8
+      - 9.9.9.9
+    networks:
+      - JB
+    volumes:
+      - .:/srv/app
+    environment:
+      MIX_ENV: prod
+    build:
+      args:
+        MIX_ENV: prod
+      context: "."
+      dockerfile: Dockerfile
+    ports:
+      - "8000:65535"
