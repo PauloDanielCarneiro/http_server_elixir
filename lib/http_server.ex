@@ -5,16 +5,19 @@ defmodule HTTPSERVER do
   def start(_type, {opts, [file|_]}) do
     import Supervisor.Spec, warn: false
 
+    #get the prot and the file from shell command
     port = Keyword.get(opts, :port) || Application.get_env(:http_server, :port)
-    app = HTTPSERVER.CodeLoader.load(file)
+    application = HTTPSERVER.CodeLoader.load(file)
 
+    #configure erlang processesapplication
     children = [
       {Task.Supervisor, name: HTTPSERVER.Server.Supervisor},
-      {HTTPSERVER.Listener, port: port, app: app}
+      {HTTPSERVER.Listener, port: port, application: application}
     ]
 
-    opts = [strategy: :one_for_all, name: HTTPSERVER.Supervisor]
+    opts = [strategy: :one_for_one, name: HTTPSERVER.Supervisor]
 
+    #start processes
     Supervisor.start_link(children, opts)
   end
 end

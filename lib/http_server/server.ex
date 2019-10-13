@@ -43,8 +43,6 @@ defmodule HTTPSERVER.Server do
     {path, query} = parse_uri(path)
 
     Logger.info("Recieved #{verb} #{path}#{query}")
-    Logger.info("Called with headers:")
-    IO.inspect(headers)
 
     %{
       method: verb,
