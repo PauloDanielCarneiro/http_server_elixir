@@ -1,8 +1,9 @@
 defmodule MyApp do
-  # handle the / path
+  # GET on /
   def call(%{method: "GET", path: "/"}),
     do: %{code: 200, type: "text/plain", body: "Returns a List of resources"}
 
+  # example of POST with /create
   def call(%{method: "POST", path: "/create"}),
     do: %{
       code: 201,
@@ -11,6 +12,7 @@ defmodule MyApp do
         "{\"message\":\"This method creates a new resource and returns 201\",\"status\":\"created\"}"
     }
 
+  # returns 401
   def call(%{method: "GET", path: "/amiauthorized"}),
     do: %{
       code: 401,
@@ -18,6 +20,7 @@ defmodule MyApp do
       body: "{\"message\":\"You\"re not authorized\",\"status\":\"unauthoried\"}"
     }
 
+  # endpoint for 418
   def call(%{method: "GET", path: "/teapot"}),
     do: %{
       code: 418,
@@ -25,15 +28,19 @@ defmodule MyApp do
       body: "{\"message\":\"Use me\",\"status\":\"i'm a teapot\"}"
     }
 
-  def call(%{method: "DELETE", path: "/"}),
+  # example of DELETE on /erase
+  def call(%{method: "DELETE", path: "/erase"}),
     do: %{code: 204, type: "text/plain", body: ""}
 
+  # OPTIONS on /
   def call(%{method: "OPTIONS", path: "/"}),
-    do: %{code: 200, type: "text/plain", body: "HEAD, GET, POST, DELETE, OPTIONS"}
+    do: %{code: 200, type: "text/plain", body: "HEAD, GET, OPTIONS"}
 
+  # HEAD on /
   def call(%{method: "HEAD", path: "/"}),
     do: %{code: 200, type: "text/plain", body: ""}
 
+  # showcase of error 420
   def call(%{method: "POST", path: "/blazeit"}),
     do: %{
       code: 420,
