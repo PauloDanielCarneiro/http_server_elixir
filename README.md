@@ -4,10 +4,10 @@ A tiny concurrent and fault-tolerant HTTP server.
 
 ## Usage
 
-Docker:
-Run `docker-compose up` and send request to localhost:8000 with the path defined in app/myapp.exs.
+### Using Docker:
+Run `docker-compose up` and send requests to localhost:8000 with the paths defined in app/myapp.exs.
 
-Everytime you make a change in any file, please run `docker-compose down`and `docker-compose up`.
+Everytime you make a change in a file, please run `docker-compose down`and `docker-compose up`.
 
 If you want to make use of this application without docker, please install elixir with erlang v22. After you can create an app file:
 
@@ -20,9 +20,10 @@ defmodule MyApp do
 
   # everything else is a 404 response
   def call(_),
-    do: %{code: 404, body: "say what now?"}
+    do: %{code: 404, body: "The requested resource was not found"}
 end
 ```
+### To run locally
 
 Build the script:
 
@@ -31,8 +32,7 @@ mix deps.get
 mix escript.build
 ```
 
-
-Then, start the server
+Then start the server:
 
 ```shell
 ./http_server examples/myapp.exs --port 3000
